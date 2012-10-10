@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Binbin.AdMobApi")]
-[assembly: AssemblyDescription("Binbin.AdMobApi")]
+[assembly: AssemblyTitle("UnitTestProject.Binbin.AdMobApi")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("lotosbin")]
-[assembly: AssemblyProduct("Binbin.AdMobApi")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("UnitTestProject.Binbin.AdMobApi")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7a8d4762-e4f0-48f9-a7e5-6f2aa7442186")]
+[assembly: Guid("461c432f-8430-4a79-8391-f5f13d4bd2d2")]
 
 // Version information for an assembly consists of the following four values:
 //
