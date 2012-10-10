@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdMobApiClientV2.cs" />
+    <Compile Include="AdMobApiPage.cs" />
+    <Compile Include="AdMobApiReturn.cs" />
+    <Compile Include="AdMobApiReturns.cs" />
+    <Compile Include="AdMobApiSiteSearchData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

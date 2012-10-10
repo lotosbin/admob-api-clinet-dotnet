@@ -1,39 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Binbin.HttpHelper;
 
 namespace Binbin.AdMobApi
 {
-    public class AdMobApiReturn<TData>
-        where TData : class
-    {
-        public AdMobApiReturn()
-        {
-            this.errors = new List<string>();
-            this.warnings = new List<string>();
-            this.data = new List<TData>();
-            this.page = new AdMobApiPage();
-
-        }
-        public List<string> errors { get; set; }
-        public List<string> warnings { get; set; }
-        public List<TData> data { get; set; }
-        public AdMobApiPage page { get; set; }
-    }
-
-    public class AdMobApiPage
-    {
-        public int current { get; set; }
-        public int total { get; set; }
-    }
-
     public class AdMobApiClientV2
     {
         private string client_key;
@@ -55,7 +25,12 @@ namespace Binbin.AdMobApi
                                 new APIParameter("email",(this.email)),
                                 new APIParameter("password", (this.password)),
                             };
-            string result = new SyncHttpRequest().HttpPost("https://api.admob.com/v2/auth/login", paras);
+
+            return new SyncHttpRequest().HttpPost("https://api.admob.com/v2/auth/login", paras);
+        }
+
+        public void GetToken(string result)
+        {
             if (result.Contains("token"))
             {
                 var startTag = "\"token\":\"";
@@ -63,7 +38,12 @@ namespace Binbin.AdMobApi
                 int endIndex = result.IndexOf("\"", startIndex);
                 this.token = result.Substring(startIndex, endIndex - startIndex);
             }
-            return result;
+        }
+
+        public AdMobApiReturn<AdMobApiAuthLoginData> AuthLogin2()
+        {
+            var result = this.AuthLogin();
+            return new JavaScriptSerializer().Deserialize<AdMobApiReturn<AdMobApiAuthLoginData>>(result);
         }
         public string AuthLogout()
         {
@@ -72,8 +52,7 @@ namespace Binbin.AdMobApi
                                 new APIParameter("client_key", this.client_key),
                                 new APIParameter("token",(this.token)),
                             };
-            string result = new SyncHttpRequest().HttpPost("https://api.admob.com/v2/auth/logout", paras);
-            return result;
+            return new SyncHttpRequest().HttpPost("https://api.admob.com/v2/auth/logout", paras);
         }
         public string SiteSearch()
         {
@@ -82,22 +61,17 @@ namespace Binbin.AdMobApi
                                 new APIParameter("client_key", this.client_key),
                                 new APIParameter("token",(this.token)),
                             };
-            string result = new SyncHttpRequest().HttpGet("https://api.admob.com/v2/site/search", paras);
-            return result;
+            return new SyncHttpRequest().HttpGet("https://api.admob.com/v2/site/search", paras);
         }
-        public AdMobApiReturn<AdMobApiSiteSearchData> SiteSearch2()
+        public AdMobApiReturns<AdMobApiSiteSearchData> SiteSearch2()
         {
             var result = this.SiteSearch();
-            var serializer= new JavaScriptSerializer();
-            var r = serializer.Deserialize<AdMobApiReturn<AdMobApiSiteSearchData>>(result);
-            return r;
+            return new JavaScriptSerializer().Deserialize<AdMobApiReturns<AdMobApiSiteSearchData>>(result);
         }
     }
-    public class AdMobApiSiteSearchData
+
+    public class AdMobApiAuthLoginData
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-        public string description { get; set; }
+        public string token { get; set; }
     }
 }

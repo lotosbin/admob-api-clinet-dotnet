@@ -11,17 +11,24 @@ namespace UnitTestProject.Binbin.AdMobApi
         [TestMethod]
         public void Auth_LoginTest()
         {
-            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com", "2l77sr7n2qgpgsvs");
+            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com",
+                                              "2l77sr7n2qgpgsvs");
             var result = client.AuthLogin();
+            client.GetToken(result);
             Debug.WriteLine(result);
             Debug.WriteLine("token:" + client.token);
             Assert.IsTrue(result.Contains("token"));
         }
+
         [TestMethod]
         public void Auth_LogoutTest()
         {
-            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com", "2l77sr7n2qgpgsvs");
-            { var result = client.AuthLogin(); }
+            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com",
+                                              "2l77sr7n2qgpgsvs");
+            {
+                var result = client.AuthLogin();
+                client.GetToken(result);
+            }
             {
                 var reuslt = client.AuthLogout();
                 Debug.WriteLine(reuslt);
@@ -30,11 +37,16 @@ namespace UnitTestProject.Binbin.AdMobApi
                 //todo assert
             }
         }
+
         [TestMethod]
         public void SiteSearchTest()
         {
-            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com", "2l77sr7n2qgpgsvs");
-            { var result = client.AuthLogin(); }
+            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com",
+                                              "2l77sr7n2qgpgsvs");
+            {
+                var result = client.AuthLogin();
+                client.GetToken(result);
+            }
             {
                 var result = client.SiteSearch();
                 Debug.WriteLine(result);
@@ -43,11 +55,16 @@ namespace UnitTestProject.Binbin.AdMobApi
                 var reuslt = client.AuthLogout();
             }
         }
+
         [TestMethod]
         public void SiteSearch2Test()
         {
-            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com", "2l77sr7n2qgpgsvs");
-            { var result = client.AuthLogin(); }
+            var client = new AdMobApiClientV2("k19ad0802fac1add86e6cd045de05395", "lotosbin@gmail.com",
+                                              "2l77sr7n2qgpgsvs");
+            {
+                var result = client.AuthLogin();
+                client.GetToken(result);
+            }
             {
                 var result = client.SiteSearch2();
                 Debug.WriteLine(result);
